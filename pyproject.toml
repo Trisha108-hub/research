@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "research-intelligence-engine"
+version = "0.3.0"
+description = "AI-assisted literature review and evidence synthesis engine"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "faiss-cpu",
+    "jinja2",
+    "numpy",
+    "pandas",
+    "pydantic",
+    "pydantic-settings",
+    "requests",
+    "sentence-transformers",
+    "streamlit",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov"]
+advanced = ["langgraph", "networkx", "pyvis"]
+api = ["fastapi", "uvicorn", "passlib", "python-jose"]
+evaluation = ["datasets", "ragas"]
+watsonx-sdk = ["ibm-watsonx-ai>=1.9.0"]
+all = [
+    "fastapi", "uvicorn", "passlib", "python-jose", "ibm-watsonx-ai>=1.9.0",
+    "langgraph", "networkx", "pyvis", "datasets", "ragas",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.setuptools.packages.find]
+include = ["rie*", "app*"]

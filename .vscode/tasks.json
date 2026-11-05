@@ -1,0 +1,403 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Test Python project",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-m",
+				"pytest",
+				"tests/unit",
+				"-q"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Install test dependencies",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"pytest",
+				"pydantic",
+				"pydantic-settings",
+				"requests",
+				"jinja2"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run Python unit tests",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-m",
+				"pytest",
+				"tests/unit",
+				"-q"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Compile Python project",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-m",
+				"compileall",
+				"-q",
+				"rie",
+				"app",
+				"scripts",
+				"tests"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Create Python cache directories",
+			"type": "shell",
+			"command": "mkdir",
+			"args": [
+				"rie\\__pycache__",
+				"rie\\agents\\__pycache__",
+				"rie\\graph\\__pycache__",
+				"rie\\llm\\__pycache__",
+				"rie\\retrieval\\__pycache__",
+				"app\\__pycache__",
+				"scripts\\__pycache__",
+				"tests\\unit\\__pycache__"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Create cache directories",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"@('rie/__pycache__','rie/agents/__pycache__','rie/graph/__pycache__','rie/llm/__pycache__','rie/retrieval/__pycache__','app/__pycache__','scripts/__pycache__','tests/unit/__pycache__') | ForEach-Object { New-Item -ItemType Directory -Path $_ -Force | Out-Null }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Make cache directories",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-c",
+				"import pathlib; [pathlib.Path(p).mkdir(parents=True, exist_ok=True) for p in ['rie/__pycache__','rie/agents/__pycache__','rie/graph/__pycache__','rie/llm/__pycache__','rie/retrieval/__pycache__','app/__pycache__','scripts/__pycache__','tests/unit/__pycache__']]"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Make cache directories now",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-c",
+				"import pathlib; dirs='rie/__pycache__ rie/agents/__pycache__ rie/graph/__pycache__ rie/llm/__pycache__ rie/retrieval/__pycache__ app/__pycache__ scripts/__pycache__ tests/unit/__pycache__'.split(); [pathlib.Path(d).mkdir(parents=True,exist_ok=True) for d in dirs]"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Python syntax",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"scripts/check_syntax.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check updated Python syntax",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-c",
+				"import ast, pathlib; files=list(pathlib.Path('rie').rglob('*.py'))+list(pathlib.Path('app').rglob('*.py'))+list(pathlib.Path('scripts').rglob('*.py'))+list(pathlib.Path('tests').rglob('*.py')); [ast.parse(p.read_text(encoding='utf-8'), filename=str(p)) for p in files]; print(f'Parsed {len(files)} Python files successfully')"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate updated Python syntax",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"scripts/check_syntax.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate all Python syntax",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-c",
+				"import ast,pathlib; files=list(pathlib.Path('.').rglob('*.py')); [ast.parse(p.read_text(encoding='utf-8'),filename=str(p)) for p in files if '__pycache__' not in str(p)]; print(len(files))"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate final Python syntax",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"scripts/check_syntax.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate Phase 2 syntax",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"scripts/check_phase2_syntax.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate test syntax",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"scripts/check_tests_syntax.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run unit tests",
+			"type": "shell",
+			"command": "C:/Users/trish/AppData/Local/Python/pythoncore-3.16-64/python.exe",
+			"args": [
+				"-m",
+				"pytest",
+				"tests/unit",
+				"-q",
+				"--tb=short"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Install requirements with Python 3.14",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"-r",
+				"requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Install pytest with Python 3.14",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"--timeout",
+				"120",
+				"pytest==9.0.2",
+				"pytest-cov==7.0.0"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run tests with Python 3.14",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pytest",
+				"tests/unit",
+				"-q",
+				"--tb=short"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Install project requirements",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"--timeout",
+				"120",
+				"-r",
+				"requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check WatsonX SDK versions",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"index",
+				"versions",
+				"ibm-watsonx-ai"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Install updated requirements",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"--timeout",
+				"120",
+				"-r",
+				"requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Install core requirements",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"--timeout",
+				"120",
+				"-r",
+				"requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Streamlit PyArrow compatibility",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"--dry-run",
+				"streamlit==1.52.2",
+				"pyarrow==22.0.0"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Install Python 314 requirements",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"--timeout",
+				"120",
+				"-r",
+				"requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify requirements installation",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"--timeout",
+				"120",
+				"-r",
+				"requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run research tests",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pytest",
+				"tests",
+				"-v",
+				"--tb=short"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Compile Python sources with Python 3.14",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"compileall",
+				"-q",
+				"."
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Run pytest tests with Python 3.14",
+			"type": "shell",
+			"command": "C:/Python314/python.exe",
+			"args": [
+				"-m",
+				"pytest",
+				"tests",
+				"-v",
+				"--tb=short"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Run requested unit tests",
+			"type": "shell",
+			"command": "C:\\Python314\\python.exe -m pytest tests/unit/test_retrieval.py tests/unit/test_metrics.py tests/unit/test_citation_eval.py tests/unit/test_benchmark.py tests/unit/test_ragas_eval.py -v --tb=short",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

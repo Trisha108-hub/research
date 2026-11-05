@@ -1,0 +1,79 @@
+# Research Report
+
+**Research Question:** {{ state.research_question }}
+
+## Executive Summary
+
+{{ state.synthesis or state.report }}
+
+## Literature Overview
+
+{% for paper in state.papers %}
+### {{ loop.index }}. {{ paper.title }}
+- Authors: {{ paper.authors[:3] | join(", ") }}
+- Year: {{ paper.year or "Unknown" }}
+- Citations: {{ paper.cited_by_count }}
+{% else %}
+No papers retrieved.
+{% endfor %}
+
+## Paper Comparison Matrix
+
+| Paper | Methodology | Datasets | Metrics | Limitations |
+|---|---|---|---|---|
+{% for row in state.comparison_matrix %}
+| {{ row.title }} | {{ row.methodology }} | {{ row.datasets }} | {{ row.best_metric }} | {{ row.limitations }} |
+{% else %}
+| - | - | - | - | - |
+{% endfor %}
+
+## Methodological Analysis
+
+{% for evidence in state.deep_evidence %}
+### {{ evidence.title }}
+- Objective: {{ evidence.objective or "Not extracted" }}
+- Methodology: {{ evidence.methodology or "Not extracted" }}
+- Datasets: {{ evidence.datasets | join(", ") or "Not extracted" }}
+- Metrics: {{ evidence.metrics | join(", ") or "Not extracted" }}
+- Key results: {{ evidence.key_results or "Not extracted" }}
+- Limitations: {{ evidence.limitations or "Not extracted" }}
+- Contributions: {{ evidence.contributions or "Not extracted" }}
+{% endfor %}
+
+## Evidence-Supported Findings
+
+{% for item in state.evidence %}
+- **{{ item.claim }}** - {{ item.summary }} ({{ item.chunk.title }}, confidence {{ "%.2f"|format(item.confidence) }})
+{% else %}
+No evidence items extracted.
+{% endfor %}
+
+## Contradictions and Debates
+
+{% for item in state.contradictions %}
+- **{{ item.topic }}:** {{ item.description }} (confidence {{ "%.2f"|format(item.confidence) }})
+{% else %}
+No contradictions detected.
+{% endfor %}
+
+## Verification Summary
+
+- Supported claims: {{ state.verified_claims | selectattr("supported") | list | length }}
+- Flagged claims: {{ state.verified_claims | rejectattr("supported") | list | length }}
+
+## Candidate Research Gaps
+
+{% for gap in state.research_gaps %}
+### {{ gap.title }}
+{{ gap.description }}
+
+Confidence: {{ "%.2f"|format(gap.confidence) }}
+{% else %}
+No candidate research gaps identified.
+{% endfor %}
+
+## Research Limitations and Uncertainty
+
+- This report is generated from the retrieved paper set and may contain omissions or errors.
+- Candidate gaps require independent verification.
+- Unsupported claims should not be cited without verification.

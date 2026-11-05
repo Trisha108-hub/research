@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: rie-trisha108-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /research/health
+    envVars:
+      - key: WATSONX_API_KEY
+        sync: false
+      - key: WATSONX_PROJECT_ID
+        sync: false
+      - key: WATSONX_URL
+        sync: false
+      - key: WATSONX_MODEL_ID
+        value: ibm/granite-4-h-small
+      - key: SEMANTIC_SCHOLAR_API_KEY
+        sync: false
+      - key: CROSSREF_MAILTO
+        sync: false
+      - key: EMBEDDING_MODEL
+        value: lexical

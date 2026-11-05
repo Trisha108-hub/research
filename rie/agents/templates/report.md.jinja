@@ -1,0 +1,16 @@
+# Research Report: {{ state.research_question }}
+
+## Executive Summary
+
+{{ state.report }}
+
+## Supporting Evidence
+
+{% for item in state.evidence %}
+- **{{ item.claim }}** — {{ item.summary }}
+  - Source: {{ item.chunk.title }}
+  - Confidence: {{ "%.2f"|format(item.confidence) }}
+  - Stance: {{ item.stance }}
+{% else %}
+- No evidence was extracted.
+{% endfor %}

@@ -1,0 +1,12 @@
+services:
+  rie:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      EMBEDDING_MODEL: lexical
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
