@@ -1,6 +1,7 @@
 fastapi>=0.115,<1
 faiss-cpu==1.12.0
 langgraph
+sentence-transformers
 Jinja2==3.1.4
 numpy==2.3.5
 pydantic==2.12.4
