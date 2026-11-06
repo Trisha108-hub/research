@@ -17,9 +17,16 @@ class FaissVectorStore:
         self._idf: np.ndarray | None = None
         self._lexical_dimensions = 8192
         if model_name != "lexical":
-            from sentence_transformers import SentenceTransformer
-
-            self.encoder = SentenceTransformer(model_name)
+            try:
+                from sentence_transformers import SentenceTransformer
+            except ModuleNotFoundError as exc:
+                if exc.name != "sentence_transformers":
+                    raise
+                # Keep the lightweight API usable when its optional embedding
+                # package is not installed; lexical embeddings need no model download.
+                self.model_name = "lexical"
+            else:
+                self.encoder = SentenceTransformer(model_name)
         self.index = None
         self.chunks: list[Chunk] = []
 
