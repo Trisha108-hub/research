@@ -6,7 +6,6 @@ import re
 
 import faiss
 import numpy as np
-from sentence_transformers import SentenceTransformer
 
 from rie.state import Chunk
 
