@@ -53,7 +53,7 @@
   <script>
     const $=id=>document.getElementById(id);
     const localHost=['localhost','127.0.0.1'].includes(location.hostname);
-    const apiBase=window.RIE_API_BASE||(localHost?`${location.protocol}//${location.hostname}:8000`:location.origin);
+    const apiBase=window.RIE_API_BASE||(localHost?`${location.protocol}//${location.hostname}:8000`:'https://research-wmw6.onrender.com');
     const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     function updateProgress(percent,stage,startedAt){const value=Math.max(2,Math.min(100,Number(percent)||2));$('progressNumber').textContent=`${value}%`;$('progressFill').style.width=`${value}%`;$('progressStage').textContent=stage;const seconds=Math.floor((Date.now()-startedAt)/1000);$('elapsedTime').textContent=`Elapsed ${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;}
     function esc(value=''){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
